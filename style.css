@@ -1,0 +1,68 @@
+/* . = class, # = id */
+
+html, body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  color: saddlebrown;
+  background-image: url('http://all4desktop.com/data_images/original/4238046-background.jpg');
+  background-position: center top;
+  background-size: cover;
+  margin: 0;
+  text-align: center;
+}
+h1 {font-family: 'Lobster', cursive;
+font-size: 400%;
+}
+
+.page-title {
+  text-align: center;
+  font-weight: 400;
+}
+
+.page-description {
+  border: 4px solid saddlebrown;
+  text-align: center;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style-type: none;
+}
+
+.gallery-item {
+  margin: 2px;
+}
+
+.bild {
+  margin: 2px;
+}
+
+.button {
+    background-color: saddlebrown;
+    border: none;
+	border-radius: 8px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+	transition-duration: 0.8s;
+    cursor: pointer;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.button:hover {
+    background-color: #FFFFFF;
+    color: saddlebrown;
+}
