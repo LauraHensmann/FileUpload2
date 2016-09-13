@@ -7,4 +7,5 @@ if(isset($_POST['filename']) && !empty($_POST['filename'])) {
 }
 
 header ("Location: index.php");
+exit ();
 ?>		

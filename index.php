@@ -2,27 +2,34 @@
 $basedir = dirname(__FILE__);
 $ordner = "/uploads";
 $absoluterpfad = $basedir. $ordner;
-					
-					
+
 $allebilder = scandir($absoluterpfad);
 $bilder = array();
 
+if(isset($_GET['error']) && $_GET['error'] == 1){
+	echo "Invalid File Type";
+}
+
+if (isset($_GET['error2'])){
+	if($_GET['error2'] && $_GET['error2'] == 1){
+		echo "No File Selected";
+	}
+}
+
 foreach ($allebilder as $bild) {
-			
 	$bildinfo = pathinfo($absoluterpfad."/".$bild);
-			
 	if ($bild == "." || $bild == ".." || $bild == "_notes" || $bildinfo['basename'] == "Thumbs.db"){
 		continue;
 	}
-			
 	$size = ceil(filesize($absoluterpfad."/".$bild)/1024);
-
-	$bilder[] = array('link' => ".".$ordner."/".$bildinfo['basename'],
-						'name' =>$bildinfo['filename'],
-						'basename' => $bildinfo['basename']);
-
+	$bilder[] = array(
+		'link' => ".".$ordner."/".$bildinfo['basename'],
+		'name' =>$bildinfo['filename'],
+		'basename' => $bildinfo['basename']
+	);
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -54,11 +61,8 @@ foreach ($allebilder as $bild) {
 			<div>
 				<ul	class="gallery">
 				<?php
-							
 					foreach ($bilder as $bild) {
-			
-				?>	
-				
+				?>
 				<li>
 					<a href="<?php echo $bild['link'];?>">
 					<img src="<?php echo $bild['link'];?>" height="100" alt="Vorschau" /></a>
@@ -68,8 +72,6 @@ foreach ($allebilder as $bild) {
 						<input type="submit" value="Bild löschen">
 					</form>
 				</li>
-						
-			
 				<?php
 					}
 				?>
