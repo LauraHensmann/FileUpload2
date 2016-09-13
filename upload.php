@@ -1,9 +1,9 @@
 <?php
+
 if(!$_FILES){
 	header("Location: index.php");
 	exit;
 }
-
 	$allowedExts = array("png", "jpg", "jpeg", "gif");
 	$extension = strtolower(end(explode(".", $_FILES["file"]["name"]))); // nutzt den Dateinamen um die Dateiendung zu bestimmen. Um Fehler zu vermeiden, wird die Dateiendung mit strtolower zu Kleinbuchstaben umgewandelt.
 
@@ -21,30 +21,30 @@ if(!$_FILES){
 	
 		preg_match($pattern,$imagename);
 		$imagename = preg_replace($pattern, $replace, $imagename);
-		
+	
+	
+	
 	
 	if (in_array($extension, $allowedExts)){	// prüft, ob sich die Dateiendung in dem Array der erlaubten Dateiendungen existiert.
-		echo "Invalid file";
-		header("Location: index.php");
-		exit;
+		if ($_FILES["file"]["error"] > 0){		// prüft, ob der Upload-Vorgang fehlerfrei ausgeführt wurde.
+			echo "Return Code: " . $_FILES["file"]["error"] . "<br />";	// andernfalls wird eine Fehlermeldung ausgegeben.
+		}
 	}
 	
-	if ($_FILES["file"]["error"] > 0){		// prüft, ob der Upload-Vorgang fehlerfrei ausgeführt wurde.
-
-		echo "Return Code: " . $_FILES["file"]["error"] . "<br />";	// andernfalls wird eine Fehlermeldung ausgegeben.
+	if (!exif_imagetype($_FILES['file']['tmp_name'])){ // liest die ersten bytes des Bildes aus und überprüft die Signatur -> 
 		header("Location: index.php");
-		exit;
+		exit();
 	}
-			
+	
 		echo "Upload: " . $_FILES["file"]["name"] . "<br />";
 		echo "Type: " . $_FILES["file"]["type"] . "<br />";
 		echo "Size: " . ($_FILES["file"]["size"] / 1024) . " Kb<br />";
 		echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br />";
-		//if (file_exists("upload/" . $imagename)){		// prüft, ob die Datei unter diesem Dateinamen bereits existiert.
+		//if (file_exists("uploads/" . $imagename)){		// prüft, ob die Datei unter diesem Dateinamen bereits existiert.
 		//	echo $_FILES["file"]["name"] . " already exists. ";
 		//}else{
 			//move_uploaded_file($_FILES["file"]["tmp_name"],
-			//"upload/" . $_FILES["file"]["name"]);
+			//"uploads/" . $_FILES["file"]["name"]);
 		//	move_uploaded_file($_FILES["file"]["tmp_name"],"uploads/{$imagename}.{$extension}");	// verschiebt die hochgeladene Datei vom Temporären Ordner nach uploads/
 		//	echo "Stored in: " . "uploads/" . $_FILES["file"]["name"];
 		//	header ("Location: index.php");				// leitet den "Besucher" zurück auf die Startseite
